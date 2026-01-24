@@ -17,3 +17,8 @@ variable "subnet" {
     description = "Subnet"
     type = string
 }
+
+variable "vm" {
+    description = "Virtual Machine"
+    type = string
+}
