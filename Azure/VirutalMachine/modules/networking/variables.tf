@@ -1,8 +1,3 @@
-variable "resource_group_name"{
-    description = "Name of the resource group"
-    type = string
-}
-
 variable "location" {
     description = "Resources location"
     type = string
@@ -15,10 +10,5 @@ variable "vnet" {
 
 variable "subnet" {
     description = "Subnet"
-    type = string
-}
-
-variable "vm" {
-    description = "Virtual Machine"
     type = string
 }

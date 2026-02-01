@@ -21,3 +21,14 @@ terraform-azure-vm/
 ├── terraform.tfvars
 ├── outputs.tf
 ├── versions.tf
+
+terraform-azure-vm/
+├── envs/
+│   ├── dev/
+│   │   └── terraform.tfvars
+│   └── prod/
+│       └── terraform.tfvars
+├── modules/
+│   ├── rg/
+│   └── vm/
+└── main.tf
