@@ -1,11 +1,11 @@
 module "rg" {
-  source = "/modules/rg"
+  source = "./modules/rg"
 }
 
 module "network" {
-  source = "/modules/network"
+  source = "./modules/networking"
 }
 
 module "vm" {
-  source = "/modules/vm"
+  source = "./modules/virtualMachine"
 }
