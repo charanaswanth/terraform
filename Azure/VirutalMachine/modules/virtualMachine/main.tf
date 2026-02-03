@@ -4,9 +4,7 @@ resource "azurerm_linux_virtual_machine" "myDemoVM" {
   location            = var.location
   size                = "Standard_B1s"
   admin_username      = "adminuser"
-  network_interface_ids = [
-    azurerm_network_interface.myDemoNic.id,
-  ]
+  network_interface_ids = var.azurerm_network_interface
 
   admin_ssh_key {
     username   = "adminuser"
