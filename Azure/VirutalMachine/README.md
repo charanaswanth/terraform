@@ -11,10 +11,12 @@ az login --service-principal -u CLIENT_ID -p CLIENT_SECRET --tenant TENANT_ID
 ```
 
 ## Export Credentials
+```sh
 export ARM_CLIENT_ID="00000000-0000-0000-0000-000000000000"
 export ARM_CLIENT_SECRET="00000000-0000-0000-0000-000000000000"
 export ARM_TENANT_ID="10000000-0000-0000-0000-000000000000"
 export ARM_SUBSCRIPTION_ID="20000000-0000-0000-0000-000000000000"
+```
 
 ## Terraform dir structure
 
@@ -42,6 +44,6 @@ backend "azurerm" {
     resource_group_name  = ""
     storage_account_name = "" # blob name
     container_name       = ""
-    key                  = "" # path to terraform state gile
+    key                  = "" # path to terraform state file
   }
 ```
