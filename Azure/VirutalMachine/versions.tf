@@ -1,5 +1,11 @@
 terraform {
   required_version = ">= 1.5.0"
+  backend "azurerm" {
+    resource_group_name  = "myDemoRG"
+    storage_account_name = "mydemoblob1997"
+    container_name       = "tfstate"
+    key                  = "demo.terraform.tfstate"
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"

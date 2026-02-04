@@ -14,21 +14,16 @@ export ARM_CLIENT_SECRET="12345678-0000-0000-0000-000000000000"
 export ARM_TENANT_ID="10000000-0000-0000-0000-000000000000"
 export ARM_SUBSCRIPTION_ID="20000000-0000-0000-0000-000000000000"
 
-terraform-azure-vm/
-├── main.tf
-├── provider.tf
-├── variables.tf
-├── terraform.tfvars
-├── outputs.tf
-├── versions.tf
+# terraform dir structure
 
 terraform-azure-vm/
 ├── envs/
-│   ├── dev/
-│   │   └── terraform.tfvars
-│   └── prod/
-│       └── terraform.tfvars
+│   ├── terraform.tfvars
 ├── modules/
 │   ├── rg/
-│   └── vm/
+│   └── networking/
+|   └── vm/
 └── main.tf
+└── provider.tf
+└── versions.tf
+└── variables.tf
