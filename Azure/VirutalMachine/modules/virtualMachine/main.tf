@@ -8,7 +8,7 @@ resource "azurerm_linux_virtual_machine" "myDemoVM" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = file("~/.ssh/id_terra.pub")
   }
 
   os_disk {
