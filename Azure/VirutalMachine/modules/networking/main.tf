@@ -23,3 +23,22 @@ resource "azurerm_network_interface" "myDemoNic" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+
+resource "azurerm_network_security_group" "myDemoNSG" {
+  name                = var.nsg
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
+  security_rule {
+    name                       = "demorule"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+}
