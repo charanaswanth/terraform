@@ -18,7 +18,7 @@ resource "azurerm_network_security_group" "myDemoNSG" {
   resource_group_name = var.resource_group_name
 
   security_rule {
-    name                       = "SSH rule"
+    name                       = "SSH"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
@@ -30,7 +30,7 @@ resource "azurerm_network_security_group" "myDemoNSG" {
   }
 
   security_rule {
-    name                       = "App rule"
+    name                       = "App"
     priority                   = 101
     direction                  = "Inbound"
     access                     = "Allow"
@@ -54,8 +54,7 @@ resource "azurerm_network_interface" "myDemoNic" {
     private_ip_address_allocation = "Dynamic"
   }
 }
-
-resource "azurerm_network_interface_application_security_group_association" "linkmynsg" {
-  network_interface_id          = azurerm_network_interface.myDemoNic.id
-  application_security_group_id = azurerm_network_security_group.myDemoNSG.id
+resource "azurerm_network_interface_security_group_association" "linkMyNsg" {
+  network_interface_id      = azurerm_network_interface.myDemoNic.id
+  network_security_group_id = azurerm_network_security_group.myDemoNSG.id
 }
