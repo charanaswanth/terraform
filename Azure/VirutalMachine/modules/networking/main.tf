@@ -18,7 +18,7 @@ resource "azurerm_network_security_group" "myDemoNSG" {
   resource_group_name = var.resource_group_name
 
   security_rule {
-    name                       = "demorule"
+    name                       = "SSH rule"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
@@ -30,7 +30,7 @@ resource "azurerm_network_security_group" "myDemoNSG" {
   }
 
   security_rule {
-    name                       = "demorule"
+    name                       = "App rule"
     priority                   = 101
     direction                  = "Inbound"
     access                     = "Allow"
@@ -57,5 +57,5 @@ resource "azurerm_network_interface" "myDemoNic" {
 
 resource "azurerm_network_interface_application_security_group_association" "linkmynsg" {
   network_interface_id          = azurerm_network_interface.myDemoNic.id
-  application_security_group_id = azurerm_application_security_group.myDemoNSG.id
+  application_security_group_id = azurerm_network_security_group.myDemoNSG.id
 }
