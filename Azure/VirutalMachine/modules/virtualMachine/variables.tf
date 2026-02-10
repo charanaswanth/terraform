@@ -17,3 +17,8 @@ variable "azurerm_network_interface" {
     description = "Azure NIC"
     type = list(string)
 }
+
+variable "azurerm_public_ip" {
+  description = "Azure IP"
+  type = string  
+}

@@ -19,6 +19,7 @@ module "vm" {
   vm                        = var.vm
   resource_group_name       = module.rg.resource_group_name
   azurerm_network_interface = [module.network.azurerm_network_interface]
+  azurerm_public_ip         = module.network.azurerm_public_ip
 }
 
 

@@ -43,6 +43,13 @@ resource "azurerm_network_security_group" "myDemoNSG" {
 
 }
 
+resource "azurerm_public_ip" "myDemoIp" {
+  name                = "myDemoPublicIP"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  allocation_method   = "Static"
+}
+
 resource "azurerm_network_interface" "myDemoNic" {
   name                = "myDemoNIC"
   location            = var.location
@@ -52,6 +59,7 @@ resource "azurerm_network_interface" "myDemoNic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.myDemoSubnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.myDemoIp.id
   }
 }
 resource "azurerm_network_interface_security_group_association" "linkMyNsg" {
