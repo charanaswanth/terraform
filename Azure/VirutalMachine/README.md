@@ -47,3 +47,8 @@ backend "azurerm" {
     key                  = "" # path to terraform state file
   }
 ```
+
+
+## Demo App
+
+![alt text](demoApp.png)
