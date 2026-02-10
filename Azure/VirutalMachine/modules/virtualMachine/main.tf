@@ -33,4 +33,14 @@ resource "azurerm_linux_virtual_machine" "myDemoVM" {
     source = "app.py"
     destination = "/home/adminuser/app.py"
   }
+
+  provisioner "remote-exec" {
+    inline = [ 
+      "sudo apt update -y",
+      "sudo apt-get install -y python3-pip",
+      "sudo pip3 install flask",
+      "sudo python3 app.py &",
+     ]
+    
+  }
 }
