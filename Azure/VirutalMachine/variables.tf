@@ -18,6 +18,11 @@ variable "subnet" {
   type        = string
 }
 
+variable "nsg" {
+  description = "NSG to allow ssh"
+  type        = string
+}
+
 variable "vm" {
   description = "Virtual Machine"
   type        = string
