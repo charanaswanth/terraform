@@ -22,3 +22,44 @@ vault server -dev
 4. Access the vault page (localhost:8200)
 
 ![alt text](vault.png)
+
+5. Login vault with root token
+
+## Save SSH key in Vault 🚀 
+
+1. Export vault address and token
+```sh
+export VAULT_ADDR="http://localhost:8200"
+export VAULT_TOKEN="<root_token>"
+```
+
+2. Create kv secret engine and add the ssh_key as value
+
+3. Validate the kv creation
+```sh
+vault kv get -mount="kv" "ssh"
+```
+
+## Use it in terraform 🚀 
+
+1. Add vault under provider
+
+```sh
+terraform {
+  required_providers {
+    vault = {
+      source = "hashicorp/vault"
+      version = "5.7.0"
+    }
+  }
+}
+```
+
+2. Read SSH key from vault and use it in moduel
+
+```sh
+data "vault_kv_secret_v2" "ssh_key" {
+  mount = "secret"
+  name  = "ssh"
+}
+```
