@@ -48,7 +48,7 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
 
 
   default_node_pool {
-    name       = "mydemonode"
+    name       = "default"
     node_count = 1
     vm_size    = "Standard_D2ps_v6"
   }
@@ -63,11 +63,11 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
   }
 
   network_profile {
-    network_plugin = "azure"
+    network_plugin = "kubenet"
     network_policy = "calico"
     service_cidr = "10.1.0.0/27"
     dns_service_ip = "10.1.0.2"
-    network_plugin_mode = "overlay"
+    # network_plugin_mode = "overlay"
   }
 
   tags = {
@@ -80,7 +80,7 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
 resource "azurerm_kubernetes_cluster_node_pool" "mydemonode" {
   name                  = "mydemonode"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.myDemoAKS.id
-  vm_size               = "B2pls_v2"
+  vm_size               = "standard_b2pls_v2"
   node_count            = 1
 
   tags = {
