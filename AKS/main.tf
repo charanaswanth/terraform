@@ -51,6 +51,8 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
     name       = "default"
     node_count = 1
     vm_size    = "Standard_D2ps_v6"
+    os_sku = "AzureLinux"
+    zones = [ "1" ]
   }
 
   node_provisioning_profile {
@@ -80,8 +82,9 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
 resource "azurerm_kubernetes_cluster_node_pool" "mydemonode" {
   name                  = "mydemonode"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.myDemoAKS.id
-  vm_size               = "standard_b2pls_v2"
+  vm_size               = "Standard_D2ps_v6"
   node_count            = 1
+  os_sku = "AzureLinux"
 
   tags = {
     env     = "dev"
