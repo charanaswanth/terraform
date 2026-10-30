@@ -26,7 +26,7 @@ resource "azurerm_subnet" "myDemoSubnet" {
   name                              = "myDemoSubnet"
   resource_group_name               = azurerm_resource_group.myDemo.name
   virtual_network_name              = azurerm_virtual_network.myDemoVnet.name
-  address_prefixes                  = ["10.0.1.0/27"]
+  address_prefixes                  = ["10.0.1.0/24"]
   private_endpoint_network_policies = "Enabled"
   default_outbound_access_enabled   = false
 }
@@ -46,8 +46,8 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
   node_os_upgrade_channel   = "NodeImage"
   private_cluster_enabled   = false
   sku_tier                  = "Free"
-  oidc_issuer_enabled       = false
-  local_account_disabled    = true
+  oidc_issuer_enabled       = true
+  local_account_disabled    = false
 
 
   default_node_pool {
@@ -71,10 +71,8 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
   network_profile {
     network_plugin = "kubenet"
     network_policy = "calico"
-    service_cidr   = "10.1.0.0/27"
-    dns_service_ip = "10.1.0.2"
-    outbound_type  = "userDefinedRouting"
-    # network_plugin_mode = "overlay"
+    service_cidr   = "172.1.0.0/27"
+    dns_service_ip = "172.1.0.3"
   }
 
   azure_active_directory_role_based_access_control {
