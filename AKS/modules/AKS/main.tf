@@ -86,3 +86,10 @@ resource "azurerm_kubernetes_cluster_node_pool" "mydemonode" {
 #   location            = var.location
 #   resource_group_name = azurerm_resource_group.myDemo.name
 # }
+
+resource "azurerm_role_assignment" "myDemoRole" {
+  principal_id                     = azurerm_kubernetes_cluster.myDemoAKS.kubelet_identity[0].object_id
+  role_definition_name             = "AcrPull"
+  scope                            = var.acrID
+  skip_service_principal_aad_check = true
+}

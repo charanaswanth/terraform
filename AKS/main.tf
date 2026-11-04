@@ -13,10 +13,17 @@ module "networking" {
   rg       = azurerm_resource_group.myDemo.name
 }
 
+module "acr" {
+  source   = "./modules/ACR"
+  location = var.location
+  rg       = azurerm_resource_group.myDemo.name
+}
+
 module "aks" {
   source     = "./modules/AKS"
   location   = var.location
   rg         = azurerm_resource_group.myDemo.name
   vnetName   = module.NETWORKING.vnetName
   subnetName = module.NETWORKING.subnetName
+  acrID      = module.ACR.acrID
 }

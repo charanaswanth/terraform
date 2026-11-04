@@ -13,3 +13,7 @@ variable "vnetName" {
 variable "subnetName"{
     type = string
 }
+
+variable "acrID" {
+  type = string
+}
