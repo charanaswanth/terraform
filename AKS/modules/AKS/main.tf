@@ -1,0 +1,88 @@
+resource "azurerm_kubernetes_cluster" "myDemoAKS" {
+  name                      = var.vnetName
+  location                  = var.location
+  resource_group_name       = var.rg
+  dns_prefix                = "myDemoAKS-dns"
+  automatic_upgrade_channel = "stable"
+  node_os_upgrade_channel   = "NodeImage"
+  private_cluster_enabled   = false
+  sku_tier                  = "Free"
+  oidc_issuer_enabled       = true
+  local_account_disabled    = false
+
+
+  default_node_pool {
+    name       = "default"
+    node_count = 1
+    vm_size    = "Standard_D2ps_v6"
+    os_sku     = "AzureLinux"
+    zones      = ["1"]
+    vnet_subnet_id = var.subnetName
+  }
+
+  node_provisioning_profile {
+    default_node_pools = "None"
+    mode               = "Manual"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  network_profile {
+    network_plugin = "kubenet"
+    network_policy = "calico"
+    service_cidr   = "172.1.0.0/27"
+    dns_service_ip = "172.1.0.3"
+  }
+
+  azure_active_directory_role_based_access_control {
+    azure_rbac_enabled = true
+    tenant_id          = "0d3db525-3539-49f8-bb5b-ce4549690e13"
+  }
+
+  maintenance_window_auto_upgrade {
+    frequency   = "Weekly"
+    interval    = 1
+    duration    = 4
+    day_of_week = "Saturday"
+    start_time  = "01:00"
+    utc_offset  = "+00:00"
+  }
+
+  maintenance_window_node_os {
+    frequency   = "Weekly"
+    interval    = 1
+    duration    = 4
+    day_of_week = "Sunday"
+    start_time  = "01:00"
+    utc_offset  = "+00:00"
+  }
+
+
+  tags = {
+    env     = "dev"
+    project = "demo"
+  }
+}
+
+
+resource "azurerm_kubernetes_cluster_node_pool" "mydemonode" {
+  name                  = "mydemonode"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.myDemoAKS.id
+  vm_size               = "Standard_D2ps_v6"
+  node_count            = 1
+  os_sku                = "AzureLinux"
+  vnet_subnet_id = var.subnetName
+
+  tags = {
+    env     = "dev"
+    project = "demo"
+  }
+}
+
+# resource "azurerm_user_assigned_identity" "myDemoAKS-mi" {
+#   name                = "myDemoAKS-mi"
+#   location            = var.location
+#   resource_group_name = azurerm_resource_group.myDemo.name
+# }
