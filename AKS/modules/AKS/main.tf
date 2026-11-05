@@ -5,10 +5,10 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
   dns_prefix                = "myDemoAKS-dns"
   automatic_upgrade_channel = "stable"
   node_os_upgrade_channel   = "NodeImage"
-  private_cluster_enabled   = false
+  private_cluster_enabled   = true
   sku_tier                  = "Free"
   oidc_issuer_enabled       = true
-  local_account_disabled    = false
+  local_account_disabled    = true
 
 
   default_node_pool {
@@ -30,7 +30,7 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
   }
 
   network_profile {
-    network_plugin = "kubenet"
+    network_plugin = "azure"
     network_policy = "calico"
     service_cidr   = "172.1.0.0/27"
     dns_service_ip = "172.1.0.3"
