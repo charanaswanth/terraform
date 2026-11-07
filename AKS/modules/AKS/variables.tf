@@ -10,7 +10,7 @@ variable "vnetName" {
   type = string
 }
 
-variable "subnetName"{
+variable "subnetID"{
     type = string
 }
 

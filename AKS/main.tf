@@ -20,10 +20,10 @@ module "acr" {
 }
 
 module "aks" {
-  source     = "./modules/AKS"
-  location   = var.location
-  rg         = azurerm_resource_group.myDemo.name
-  vnetName   = module.networking.vnetName
-  subnetName = module.networking.subnetName
-  acrID      = module.acr.acrID
+  source   = "./modules/AKS"
+  location = var.location
+  rg       = azurerm_resource_group.myDemo.name
+  vnetName = module.networking.vnetName
+  subnetID = module.networking.subnetID
+  acrID    = module.acr.acrID
 }

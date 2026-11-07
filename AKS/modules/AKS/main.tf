@@ -1,5 +1,5 @@
 resource "azurerm_kubernetes_cluster" "myDemoAKS" {
-  name                      = var.vnetName
+  name                      = "myDemoAKS"
   location                  = var.location
   resource_group_name       = var.rg
   dns_prefix                = "myDemoAKS-dns"
@@ -17,7 +17,7 @@ resource "azurerm_kubernetes_cluster" "myDemoAKS" {
     vm_size    = "Standard_D2ps_v6"
     os_sku     = "AzureLinux"
     zones      = ["1"]
-    vnet_subnet_id = var.subnetName
+    vnet_subnet_id = var.subnetID
   }
 
   node_provisioning_profile {
@@ -73,7 +73,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "mydemonode" {
   vm_size               = "Standard_D2ps_v6"
   node_count            = 1
   os_sku                = "AzureLinux"
-  vnet_subnet_id = var.subnetName
+  vnet_subnet_id = var.subnetID
 
   tags = {
     env     = "dev"
