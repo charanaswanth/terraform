@@ -8,7 +8,8 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "mydemo"
+    use_azuread_auth     = true
+    resource_group_name  = "tfrg"
     storage_account_name = "tfbackend97"
     container_name       = "tfstate"
     key                  = "demo.terraform.tfstate"
