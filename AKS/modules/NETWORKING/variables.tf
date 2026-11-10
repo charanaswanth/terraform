@@ -13,7 +13,7 @@ variable "tags" {
 variable "vnet_name" {
   type = string
   default = "my_demo_vnet"
-  description = "Project Virutal Network"
+  description = "Project Virtual Network"
 }
 
 variable "subent_name"{

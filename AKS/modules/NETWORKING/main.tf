@@ -37,3 +37,9 @@ resource "azurerm_network_security_group" "my_demo_nsg" {
 
   tags = var.tags
 }
+
+
+resource "azurerm_subnet_network_security_group_association" "my_demo_nsg_subnet_assc" {
+  subnet_id                 = azurerm_subnet.my_demo_subnet.id
+  network_security_group_id = azurerm_network_security_group.my_demo_nsg.id
+}
