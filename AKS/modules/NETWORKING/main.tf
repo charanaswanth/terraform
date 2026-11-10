@@ -1,5 +1,5 @@
 resource "azurerm_virtual_network" "my_demo_vnet" {
-  name                = var.vnetName
+  name                = var.vnet_name
   location            = var.location
   resource_group_name = var.rg
   address_space       = ["10.0.0.0/23"]
@@ -10,10 +10,30 @@ resource "azurerm_virtual_network" "my_demo_vnet" {
 }
 
 resource "azurerm_subnet" "my_demo_subnet" {
-  name                              = var.subnetName
+  name                              = var.subent_name
   resource_group_name               = var.rg
   virtual_network_name              = azurerm_virtual_network.my_demo_vnet.name
   address_prefixes                  = ["10.0.1.0/24"]
   private_endpoint_network_policies = "Enabled"
   default_outbound_access_enabled   = false
+}
+
+resource "azurerm_network_security_group" "my_demo_nsg" {
+  name                = var.nsg_name
+  location            = var.location
+  resource_group_name = var.rg
+
+  security_rule {
+    name                       = "rule1"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  tags = var.tags
 }
