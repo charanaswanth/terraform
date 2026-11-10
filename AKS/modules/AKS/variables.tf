@@ -43,3 +43,15 @@ variable "aks_name" {
   default = "my_demo_aks"
   description = "Project cluster"
 }
+
+variable "aks_admin_group_id" {
+  type = string
+  default = "62d5095b-5ed7-429c-910e-c025dbea68e4"
+  description = "Admin Group with cluster level accesss"
+}
+
+variable "aks_developer_group_id" {
+  type = string
+  default = "29d6bfe0-e201-4c91-bb97-1acb6883d971"
+  description = "Developer Group with namespace level access"
+}

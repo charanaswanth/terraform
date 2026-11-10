@@ -90,15 +90,3 @@ resource "azurerm_kubernetes_cluster_node_pool" "mydemonode" {
 #   location            = var.location
 #   resource_group_name = azurerm_resource_group.myDemo.name
 # }
-
-resource "azure_active_directory_role_based_access_control" "aks_rbac" {
-  tenant_id = var.tenant_id
-  azure_rbac_enabled = false
-}
-
-resource "azurerm_role_assignment" "my_demo_role" {
-  principal_id                     = azurerm_kubernetes_cluster.my_demo_aks.kubelet_identity[0].object_id
-  role_definition_name             = "AcrPull"
-  scope                            = var.acr_id
-  skip_service_principal_aad_check = true
-}
