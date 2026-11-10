@@ -1,7 +1,7 @@
-output "vnetName" {
-  value = azurerm_virtual_network.myDemoVnet.name
+output "vnet_name" {
+  value = azurerm_virtual_network.my_demo_vnet
 }
 
-output "subnetID" {
-  value = azurerm_subnet.myDemoSubnet.id
+output "subnet_id" {
+  value = azurerm_subnet.my_demo_subnet
 }

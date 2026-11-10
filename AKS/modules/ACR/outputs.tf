@@ -1,3 +1,3 @@
-output "acrID" {
-  value = azurerm_container_registry.myDemoACR.id
+output "acr_id" {
+  value = azurerm_container_registry.my_demo_acr.id
 }

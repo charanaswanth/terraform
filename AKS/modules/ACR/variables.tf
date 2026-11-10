@@ -6,8 +6,14 @@ variable "location" {
     type = string
 }
 
-
-variable "acrName" {
+variable "acr_name" {
   type = string
   default = "myDemoACR"
+  description = "Azure Container Registry name"
+}
+
+variable "sku" {
+  type = string
+  default = "Basic"
+  description = "ACR service tier"
 }

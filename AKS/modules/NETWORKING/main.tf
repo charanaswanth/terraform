@@ -1,4 +1,4 @@
-resource "azurerm_virtual_network" "myDemoVnet" {
+resource "azurerm_virtual_network" "my_demo_vnet" {
   name                = var.vnetName
   location            = var.location
   resource_group_name = var.rg
@@ -6,16 +6,13 @@ resource "azurerm_virtual_network" "myDemoVnet" {
   encryption {
     enforcement = "AllowUnencrypted"
   }
-  tags = {
-    env     = "dev"
-    project = "demo"
-  }
+  tags = var.tags
 }
 
-resource "azurerm_subnet" "myDemoSubnet" {
-  name                              = "myDemoSubnet"
+resource "azurerm_subnet" "my_demo_subnet" {
+  name                              = var.subnetName
   resource_group_name               = var.rg
-  virtual_network_name              = azurerm_virtual_network.myDemoVnet.name
+  virtual_network_name              = azurerm_virtual_network.my_demo_vnet.name
   address_prefixes                  = ["10.0.1.0/24"]
   private_endpoint_network_policies = "Enabled"
   default_outbound_access_enabled   = false
