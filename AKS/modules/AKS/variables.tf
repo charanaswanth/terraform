@@ -34,7 +34,7 @@ variable "acr_id" {
   type = string
 }
 
-variable "ARM_TENANT_ID" {
+variable "tenant_id" {
   type = string
 }
 

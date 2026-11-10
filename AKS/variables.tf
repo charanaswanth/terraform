@@ -10,7 +10,7 @@ variable "rg" {
   description = "Project resource group"
 }
 
-variable "ARM_TENANT_ID" {
-  type        = string
-  description = "Project tenant ID"
-}
+# variable "tenant_id" {
+#   type        = string
+#   description = "Project tenant ID"
+# }

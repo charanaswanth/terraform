@@ -14,5 +14,9 @@
 ## Configure the state backend
 
 1. Create a **Azure Blob Storage account** `tfbackend97` under **Resource Group** `tfrg`.
-2. Go to **Access control (IAM) > Add role assignment**. Assign **Storage Blob Data Contributor** role to the `terraform-provisioner` service principal. This grants access to the `tfstate` container used by the Terraform backend.
-3. Run `terraform init`.
+2. Enable below **Data Protection**
+    -  Enable soft delete for blobs - 7 days
+    -  Enable soft delete for containers - 7 days
+    -  Enable versioning for blobs - Infinite
+3. Go to **Access control (IAM) > Add role assignment**. Assign **Storage Blob Data Contributor** role to the `terraform-provisioner` service principal. This grants access to the `tfstate` container used by the Terraform backend.
+4. Run `terraform init`.

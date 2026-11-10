@@ -8,7 +8,7 @@ variable "location" {
 
 variable "acr_name" {
   type = string
-  default = "myDemoACR"
+  default = "myDemoACR97"
   description = "Azure Container Registry name"
 }
 

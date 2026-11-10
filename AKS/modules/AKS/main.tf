@@ -46,7 +46,7 @@ resource "azurerm_kubernetes_cluster" "my_demo_aks" {
 
   azure_active_directory_role_based_access_control {
     azure_rbac_enabled = true
-    tenant_id          = var.ARM_TENANT_ID
+    tenant_id          = var.tenant_id
   }
 
   maintenance_window_auto_upgrade {
@@ -90,6 +90,11 @@ resource "azurerm_kubernetes_cluster_node_pool" "mydemonode" {
 #   location            = var.location
 #   resource_group_name = azurerm_resource_group.myDemo.name
 # }
+
+resource "azure_active_directory_role_based_access_control" "aks_rbac" {
+  tenant_id = var.tenant_id
+  azure_rbac_enabled = false
+}
 
 resource "azurerm_role_assignment" "my_demo_role" {
   principal_id                     = azurerm_kubernetes_cluster.my_demo_aks.kubelet_identity[0].object_id
