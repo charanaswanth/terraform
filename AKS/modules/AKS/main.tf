@@ -12,6 +12,11 @@ resource "azurerm_kubernetes_cluster" "my_demo_aks" {
   local_account_disabled    = true
   kubernetes_version = "1.34"
 
+  key_vault_secrets_provider {
+    secret_rotation_enabled = true
+    secret_rotation_interval = "5m"
+  }
+
 
   default_node_pool {
     name       = "default"
@@ -60,6 +65,10 @@ resource "azurerm_kubernetes_cluster" "my_demo_aks" {
     day_of_week = "Sunday"
     start_time  = "01:00"
     utc_offset  = "+00:00"
+  }
+
+  monitor_metrics {
+    
   }
 
   tags = var.tags
