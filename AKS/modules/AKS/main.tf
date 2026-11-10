@@ -35,8 +35,8 @@ resource "azurerm_kubernetes_cluster" "my_demo_aks" {
     network_plugin = "azure"
     network_policy = "calico"
     network_plugin_mode = "overlay"
-    service_cidr   = "172.1.0.0/27"
-    dns_service_ip = "172.1.0.3"
+    service_cidr   = "10.100.0.0/16"
+    dns_service_ip = "10.100.0.3"
   }
 
   azure_active_directory_role_based_access_control {
