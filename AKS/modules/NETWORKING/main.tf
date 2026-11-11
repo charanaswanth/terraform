@@ -27,7 +27,7 @@ resource "azurerm_network_security_group" "my_demo_nsg" {
     name                       = "rule1"
     priority                   = 100
     direction                  = "Inbound"
-    access                     = "Deny"
+    access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "*"

@@ -11,6 +11,8 @@
    export ARM_TENANT_ID="xxxx-xxxx-xxxx-xxxx-xxxx"
    export ARM_SUBSCRIPTION_ID="xxxx-xxxx-xxxx-xxxx-xxxx"
    ```
+4. Add **Role Based Access Control Administrator** under Role and Assignment at Subscription or Resource Group level to create role assignments by `terraform-provisioner`
+
 ## Configure the state backend
 
 1. Create a **Azure Blob Storage account** `tfbackend97` under **Resource Group** `tfrg`.
