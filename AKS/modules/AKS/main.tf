@@ -2,29 +2,39 @@ resource "azurerm_kubernetes_cluster" "my_demo_aks" {
   name                      = var.aks_name
   location                  = var.location
   resource_group_name       = var.rg
-  dns_prefix                = "myDemoAKS-dns"
+  dns_prefix                = var.aks_dns_prefix
   automatic_upgrade_channel = "stable"
   node_os_upgrade_channel   = "NodeImage"
   private_cluster_enabled   = true
-  sku_tier                  = "Free"
+  sku_tier                  = var.aks_sku
   oidc_issuer_enabled       = true
   workload_identity_enabled = true
   local_account_disabled    = true
-  kubernetes_version = "1.34"
+  kubernetes_version        = "1.34"
+  azure_policy_enabled      = true
+
 
   key_vault_secrets_provider {
-    secret_rotation_enabled = true
+    secret_rotation_enabled  = true
     secret_rotation_interval = "5m"
   }
 
 
   default_node_pool {
-    name       = "default"
-    node_count = 1
-    vm_size    = "Standard_D2ps_v6"
-    os_sku     = "AzureLinux"
-    zones      = ["1"]
-    vnet_subnet_id = var.subnet_id
+    name = "default"
+    # node_count     = 1
+    vm_size                      = "Standard_D2ps_v6"
+    os_sku                       = "AzureLinux"
+    zones                        = ["1"]
+    auto_scaling_enabled         = true
+    min_count                    = 1
+    max_count                    = 2
+    vnet_subnet_id               = var.subnet_id
+    only_critical_addons_enabled = true
+    temporary_name_for_rotation  = "tmp"
+    upgrade_settings {
+      max_surge = "1"
+    }
   }
 
   node_provisioning_profile {
@@ -37,11 +47,13 @@ resource "azurerm_kubernetes_cluster" "my_demo_aks" {
   }
 
   network_profile {
-    network_plugin = "azure"
-    network_policy = "calico"
+    network_plugin      = "azure"
+    network_policy      = "calico"
     network_plugin_mode = "overlay"
-    service_cidr   = var.aks_service_address
-    dns_service_ip = var.aks_dns_address
+    service_cidr        = var.aks_service_address
+    dns_service_ip      = var.aks_dns_address
+    pod_cidr            = var.aks_pod_address
+    outbound_type       = "loadbalancer"
   }
 
   azure_active_directory_role_based_access_control {
@@ -67,11 +79,11 @@ resource "azurerm_kubernetes_cluster" "my_demo_aks" {
     utc_offset  = "+00:00"
   }
 
-  monitor_metrics {    
+  monitor_metrics {
   }
 
   lifecycle {
-    ignore_changes = [ kubernetes_version ]
+    ignore_changes = [kubernetes_version]
   }
 
   tags = var.tags
@@ -82,14 +94,15 @@ resource "azurerm_kubernetes_cluster_node_pool" "mydemonode" {
   name                  = "mydemonode"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.my_demo_aks.id
   vm_size               = "Standard_D2ps_v6"
-  node_count            = 1
-  os_sku                = "AzureLinux"
-  vnet_subnet_id = var.subnet_id
-  tags = var.tags
+  # node_count            = 1
+  os_sku               = "AzureLinux"
+  vnet_subnet_id       = var.subnet_id
+  tags                 = var.tags
+  zones                = ["1"]
+  auto_scaling_enabled = true
+  min_count            = 1
+  max_count            = 2
+  upgrade_settings {
+    max_surge = "33%"
+  }
 }
-
-# resource "azurerm_user_assigned_identity" "myDemoAKS-mi" {
-#   name                = "myDemoAKS-mi"
-#   location            = var.location
-#   resource_group_name = azurerm_resource_group.myDemo.name
-# }

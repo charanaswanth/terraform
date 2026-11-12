@@ -1,6 +1,6 @@
 variable "vm" {
-    description = "Virtual Machine"
-    type = string
+  description = "Virtual Machine"
+  type        = string
 }
 
 variable "resource_group_name" {
@@ -14,16 +14,16 @@ variable "location" {
 }
 
 variable "azurerm_network_interface" {
-    description = "Azure NIC"
-    type = list(string)
+  description = "Azure NIC"
+  type        = list(string)
 }
 
 variable "azurerm_public_ip" {
   description = "Azure IP"
-  type = string  
+  type        = string
 }
 
-variable "azurerm_public_key"{
+variable "azurerm_public_key" {
   description = "SSH public key for VM"
-  type = string
+  type        = string
 }

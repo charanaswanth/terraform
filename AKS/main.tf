@@ -1,6 +1,6 @@
 locals {
   project_tags = {
-    env     = "dev"
+    env     = var.env
     project = "demo"
   }
 }

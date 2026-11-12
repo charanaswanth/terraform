@@ -11,31 +11,34 @@ variable "tags" {
 }
 
 variable "vnet_name" {
-  type = string
-  default = "my_demo_vnet"
+  type        = string
   description = "Project Virtual Network"
 }
 
 variable "vnet_address" {
-  type = list(string)
-  default = [ "10.0.0.0/23" ]
+  type        = list(string)
   description = "Virtual Network IP address"
+  validation {
+    condition     = alltrue([for c in var.vnet_address : can(cidr_host(c, 0))])
+    error_message = "Invalid VNet IP address"
+  }
 }
 
-variable "subent_name"{
-    type = string
-    default = "my_demo_subnet"
-    description = "Project Subnet"
+variable "subent_name" {
+  type        = string
+  description = "Project Subnet"
 }
 
 variable "subent_address" {
-  type = list(string)
-  default = [ "10.0.1.0/24" ]
+  type        = list(string)
   description = "Subnet IP address"
+  validation {
+    condition     = alltrue([for c in var.subent_address : can(cidr_host(c, 0))])
+    error_message = "Invalid Subnet IP address"
+  }
 }
 
 variable "nsg_name" {
-  type = string
-  default = "my_demo_nsg"
+  type        = string
   description = "Project Network SecurityGroup"
 }

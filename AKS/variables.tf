@@ -1,3 +1,8 @@
+variable "env" {
+  type        = string
+  description = "Project environment"
+}
+
 variable "location" {
   default     = "East US"
   type        = string
@@ -9,8 +14,3 @@ variable "rg" {
   type        = string
   description = "Project resource group"
 }
-
-# variable "tenant_id" {
-#   type        = string
-#   description = "Project tenant ID"
-# }

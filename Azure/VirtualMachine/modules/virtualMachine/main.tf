@@ -1,9 +1,9 @@
 resource "azurerm_linux_virtual_machine" "myDemoVM" {
-  name                = var.vm
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  size                = "Standard_B1s"
-  admin_username      = "adminuser"
+  name                  = var.vm
+  resource_group_name   = var.resource_group_name
+  location              = var.location
+  size                  = "Standard_B1s"
+  admin_username        = "adminuser"
   network_interface_ids = var.azurerm_network_interface
 
   admin_ssh_key {
@@ -30,17 +30,17 @@ resource "azurerm_linux_virtual_machine" "myDemoVM" {
     private_key = file("~/.ssh/id_terra")
   }
   provisioner "file" {
-    source = "app.py"
+    source      = "app.py"
     destination = "/home/adminuser/app.py"
   }
 
   provisioner "remote-exec" {
-    inline = [ 
+    inline = [
       "sudo apt update -y",
       "sudo apt-get install -y python3-pip",
       "sudo pip3 install flask",
       "sudo python3 app.py &",
-     ]
-    
+    ]
+
   }
 }

@@ -13,6 +13,12 @@
    ```
 4. Add **Role Based Access Control Administrator** under Role and Assignment at Subscription or Resource Group level to create role assignments by `terraform-provisioner`
 
+### OR
+
+1. Run `az login --tenant "xxxx-xxxx-xxxx-xxxx-xxxx"`
+2. Select Subscription
+3. Add **Role Based Access Control Administrator** under Role and Assignment at Subscription or Resource Group level to create role assignments by the `User`
+
 ## Configure the state backend
 
 1. Create a **Azure Blob Storage account** `tfbackend97` under **Resource Group** `tfrg`.
@@ -20,5 +26,22 @@
     -  Enable soft delete for blobs - 7 days
     -  Enable soft delete for containers - 7 days
     -  Enable versioning for blobs - Infinite
-3. Go to **Access control (IAM) > Add role assignment**. Assign **Storage Blob Data Contributor** role to the `terraform-provisioner` service principal. This grants access to the `tfstate` container used by the Terraform backend.
+3. Go to **Access control (IAM) > Add role assignment**. Assign **Storage Blob Data Contributor** role to the `terraform-provisioner` service principal or `user`. This grants access to the `tfstate` container used by the Terraform backend.
 4. Run `terraform init`.
+
+## Commands
+    export TF_CLI_ARGS_plan="-var-file=envs/dev.tfvars"
+    export TF_CLI_ARGS_apply="-var-file=envs/dev.tfvars"
+
+    terraform init -backend-config=envs/dev.backend.hcl
+
+    terraform fmt -recurisve
+    terraform validate
+
+    terraform plan
+    terraform apply --auto-approve
+
+    terraform destroy
+
+
+

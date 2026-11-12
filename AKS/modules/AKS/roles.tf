@@ -13,7 +13,7 @@ resource "azurerm_role_assignment" "dev_user" {
 resource "azurerm_role_assignment" "admin_rbac" {
   scope                = azurerm_kubernetes_cluster.my_demo_aks.id
   role_definition_name = "Azure Kubernetes Service RBAC Cluster Admin"
-  principal_id         = var.aks_admin_group_id 
+  principal_id         = var.aks_admin_group_id
 }
 
 resource "azurerm_role_assignment" "dev_rbac" {

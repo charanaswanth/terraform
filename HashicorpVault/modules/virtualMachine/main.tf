@@ -1,9 +1,9 @@
 resource "azurerm_linux_virtual_machine" "myDemoVM" {
-  name                = var.vm
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  size                = "Standard_B1s"
-  admin_username      = "adminuser"
+  name                  = var.vm
+  resource_group_name   = var.resource_group_name
+  location              = var.location
+  size                  = "Standard_B1s"
+  admin_username        = "adminuser"
   network_interface_ids = var.azurerm_network_interface
 
   admin_ssh_key {

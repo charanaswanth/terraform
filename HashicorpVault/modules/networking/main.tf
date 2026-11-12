@@ -59,7 +59,7 @@ resource "azurerm_network_interface" "myDemoNic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.myDemoSubnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.myDemoIp.id
+    public_ip_address_id          = azurerm_public_ip.myDemoIp.id
   }
 }
 resource "azurerm_network_interface_security_group_association" "linkMyNsg" {

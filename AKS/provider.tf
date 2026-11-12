@@ -12,7 +12,7 @@ terraform {
     resource_group_name  = "tfrg"
     storage_account_name = "tfbackend97"
     container_name       = "tfstate"
-    key                  = "demo.terraform.tfstate"
+    # key provided via -backend-config
   }
 }
 
