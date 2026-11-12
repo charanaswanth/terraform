@@ -1,10 +1,10 @@
-resource "azurerm_role_assignment" "admin-user" {
+resource "azurerm_role_assignment" "admin_user" {
   scope                = azurerm_kubernetes_cluster.my_demo_aks.id
   role_definition_name = "Azure Kubernetes Service Cluster User Role"
   principal_id         = var.aks_admin_group_id
 }
 
-resource "azurerm_role_assignment" "dev-user" {
+resource "azurerm_role_assignment" "dev_user" {
   scope                = azurerm_kubernetes_cluster.my_demo_aks.id
   role_definition_name = "Azure Kubernetes Service Cluster User Role"
   principal_id         = var.aks_developer_group_id
