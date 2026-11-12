@@ -35,11 +35,13 @@
 
     terraform init -backend-config=envs/dev.backend.hcl
 
-    terraform fmt -recurisve
+    terraform fmt -recursive
     terraform validate
 
     terraform plan
     terraform apply --auto-approve
+
+    export TF_CLI_ARGS_destroy="-var-file=envs/dev.tfvars"
 
     terraform destroy
 
